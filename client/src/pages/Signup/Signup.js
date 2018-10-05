@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
+import {Modal} from "../../components/Grid"
 
 class Signup extends Component{
     state = {
@@ -36,7 +37,7 @@ class Signup extends Component{
     render(){
         return(
             <div>
-                SIGN UP(slot this into a modal or something later)
+               
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}

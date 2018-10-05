@@ -11,7 +11,7 @@ class Game extends Component{
                 <p>
                     Developer: User_12314
                 </p>
-                <div class='px-auto'>
+                <div className='px-auto'>
                   <iframe title="gamewindow"
                           scrolling="no"
                           id="gameView"
