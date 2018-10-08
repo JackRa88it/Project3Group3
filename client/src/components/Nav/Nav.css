@@ -1,0 +1,50 @@
+.nav {
+  background: #222;
+  border-width: 0px 0px 1px 0px;
+  border-color: #000;
+  color: #f6f6f7;
+  min-height: 45px;
+}
+
+.navbar{
+  /* overflow:scroll; */
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+#controllerLogo {
+  height: 45px;
+}
+
+#VGNLogo {
+  height: 45px;
+}
+.nav-link {
+  background-color: #222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #222;
+  color: #f6f6f7;
+}
+
+.nav-tabs .nav-link {
+  background-color: #222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #222;
+  color: #f6f6f7;
+  border-radius: 0px;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #222;
+  color: #EE135B;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #EE135B;
+  color: #EE135B;
+}

@@ -1,0 +1,27 @@
+community todo
+
+-decide if header information will be in community or a sub-component
+-ListForums component
+  -title
+  -desc
+  -metrics (# threads, maybe preview of most recent thread)
+-ForumShow component
+-Threads in component
+-ThreadShow
+-Posts (limit 10 per page)
+  next to {where: asdf}, include {limit: 10} and for next pages {offset: x}
+  **USE {raw: true} TO SPEED UP! doesn't include instance methods, just data
+
+
+
+FORUMS SEEDS:
+-General
+  -The place to discuss anything and everything about this site
+-Games
+  -For discussing specific games
+-Technical issues
+  -If it's broken, let's fix it! Game help, bugs and feedback submission
+-Free for all
+  -The place for off-topic threads
+-Forum rules/FAQ
+  -Beginners, look here
