@@ -106,3 +106,8 @@
 .dropdown:hover{
   background-color:none;
 }
+
+.dropdown-menu-right{
+  right: 0; 
+  left: auto;
+}
