@@ -36,6 +36,7 @@
     "path": "^0.12.7",
     "react-selectize": "^3.0.1",
     "react-tag-input": "^5.2.3",
+    "rimraf": "^2.6.2",
     "sequelize": "^4.39.0",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",

@@ -4,6 +4,8 @@ var formidable = require('formidable');
 const path = require('path')
 var fs = require('fs')
 var extract = require('extract-zip')
+var rimraf = require('rimraf');
+
 
 module.exports = function (app,io){
     io.on('connection',function(socket){
@@ -162,7 +164,6 @@ module.exports = function (app,io){
         db.Tag.findAll({
             include:[{
                 model:db.Game,
-                // limit: 3
             }]
         }).then((tags)=>{
             res.json(tags)
@@ -173,18 +174,20 @@ module.exports = function (app,io){
     })
 
     app.get('/api/user/favorites', (req,res)=>{
-        db.User.findOne({
-            where: {id: req.user.id},
-        }).then((user)=>{
-            user.getFavorites()
-            .then(function(fav){
-                res.json(fav)
+        if(req.user){
+            db.User.findOne({
+                where: {id: req.user.id},
+            }).then((user)=>{
+                user.getFavorites()
+                .then(function(fav){
+                    res.json(fav)
+                })
+                // res.json(user)
+            }).catch(function(err){
+                console.log(err);
+                res.json(err)
             })
-            // res.json(user)
-        }).catch(function(err){
-            console.log(err);
-            res.json(err)
-        })
+        }
     })
 
     app.get('/api/game/:id/favorites', (req,res)=>{
@@ -201,6 +204,21 @@ module.exports = function (app,io){
         })
     })
 
+    app.post('/api/delete/game/:id', function(req,res){
+        db.Game.destroy({
+            where: {id: req.params.id}
+        }).then((deletedGames) => {
+            rimraf(path.join(__dirname,'../client/public/games/' + req.params.id),()=>{
+                fs.unlinkSync(path.join(__dirname,'../client/public/assets/gameThumbnails/' + req.params.id))
+                if(deletedGames >= 1){
+                    res.status(200).json({message:"Deleted succesfully"})
+                }
+                else{
+                    res.status(404).json({message:'record not found'})
+                }
+            })
+        })
+    })
 
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
@@ -302,6 +320,16 @@ module.exports = function (app,io){
         }
     })
 
+    app.get('/api/games/user/:id', function(req,res){
+        //Grabs all games made by a certain user
+        db.Game.findAll({
+            where: {
+                UserId: req.params.id
+            }
+        }).then((games) => {
+            res.json(games)
+        })
+    })
 
     app.get('/api/games/random', function(req,res){
         db.Game.findAll({

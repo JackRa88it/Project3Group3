@@ -3,6 +3,7 @@ import Tabs from "../../components/UserNexus/Tabs"
 import Posts from "../../components/UserNexus/Posts"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Row, Col, Container } from "../../components/Grid"
+import GameList from '../../components/GameList';
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
 
@@ -13,8 +14,9 @@ class UserNexus extends React.Component {
     Username: "",
     Banner: "",
     Bio: "",
-
+    Games: []
   };
+
 
   formPopulate = ()=>{
     if(Authenticator.isAuthenticated){
@@ -30,14 +32,32 @@ class UserNexus extends React.Component {
     }
   }
 
+  deleteHandler = (gameId) => {
+    API.deleteGame(gameId)
+    .then((res)=>{
+      this.getUserGames(Authenticator.user.id)
+    })
+  }
+
+  getUserGames() {
+    API.getUserGames(Authenticator.user.id)
+      .then(res => {
+        this.setState({ Games: res.data });
+      });
+  }
+
   handleTabClick = (event) => {
     const name = (event.target.getAttribute("name"))
     const value = (event.target.getAttribute("value"))
     console.log(name)
     console.log(value)
+
     this.setState({
       [name]: value
     })
+    if(value == 'Game'){
+      this.getUserGames();
+    }
     console.log(this.state.location);
   };
 
@@ -66,6 +86,8 @@ class UserNexus extends React.Component {
       [name]: value
     });
   };
+
+
 
   componentDidMount(){
     this.formPopulate()
@@ -127,6 +149,7 @@ class UserNexus extends React.Component {
         <div>
           <Tabs handleTabClick={this.handleTabClick} />
           <h1>Game</h1>
+          <GameList games = {this.state.Games} owner={true} deleteHandler={this.deleteHandler}/>
         </div>
       )
     }

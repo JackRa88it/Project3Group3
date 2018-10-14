@@ -1,12 +1,8 @@
-.container{
-  border: none;
-  background-color: rgba(43, 43, 43, 0);
-}
-
 .homerow{
     width: 100%;
     padding: 10px;
-    background-color: rgba(206, 28, 87, 0.796);
+    /* background-color: rgba(206, 28, 87, 0.796); */
+    background-image: linear-gradient(#EE135B, #e91e40);
     overflow: auto;
     margin: 10px 0px;
     display: flex;
